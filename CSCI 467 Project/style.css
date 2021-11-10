@@ -1,0 +1,386 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.navbar{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+nav{
+    flex: 1;
+    text-align: right;
+}
+nav ul{
+  display: inline-block;
+  list-style-type: none;
+}
+nav ul li{
+    display: inline-block;
+    margin-right: 20px;
+}
+a{
+  text-decoration: none;
+}
+.container{
+  max-width: 1300px;
+  margin: auto;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+.small-container{
+    max-width: 1080px;
+    margin: auto;
+    padding-left: 35px;
+    padding-right: 25px;
+}
+.row{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.col-2{
+    flex-basis: 50%;
+    min-width: 300px;
+    padding-left: 150px;
+    margin-top: -60px;
+}
+
+.col-2 img{
+  display: inline-block;
+  margin-left: -100px;
+  margin-top: -60px;
+  max-width: none;
+  padding: 0px;
+  padding-right: 200px;
+
+}
+.col-2 h1{
+  font-size: 50px;
+  line-height: 60px;
+  margin: 25px 0;
+}
+.btn{
+  display: inline-block;
+  background: #000080;
+  color: #fff;
+  padding: 8px 30px;
+  margin: 30px 0;
+  border-radius: 30px;
+  transition: background 0.6s;
+}
+.btn:hover{
+  background: #423434;
+}
+
+.header{
+  background: radial-gradient(#fff, #87CEEB);
+}
+.header .row{
+  margin-top: 70px;
+}
+.col-4{
+  flex-basis: 25%;
+  padding: 10px;
+  min-width: 100px;
+  margin-bottom: 50px;
+}
+.col-4 img{
+  width: 70%;
+}
+.title{
+  text-align: center;
+  margin: 0 auto 80px;
+  margin-top: 50px;
+  position: relative;
+  line-height: 40px;
+}
+.title::after{
+  content: '';
+  background: #000080;
+  width: 80px;
+  height: 5px;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+h4{
+  font-weight: normal;
+}
+.col-4 p{
+  font-size: 12px;
+}
+.menu-icon{
+  width: 28px;
+  margin-left: 20px;
+  display: none;
+}
+
+/* ---------media query for menu -------- */
+@media only screen and (max-width: 800px){
+  nav ul{
+    position: absolute;
+    top: 70px;
+    left: 0;
+    background: #333;
+    width: 100%;
+    overflow: hidden;
+    transition: max-height 0.5s;
+  }
+  nav ul li{
+    display: block;
+    margin-right: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  nav ul li a{
+    color: #fff;
+  }
+  .menu-icon{
+    display: block;
+    cursor: pointer;
+  }
+}
+/* ---------All products page-------- */
+.row-2{
+  justify-content: space-between;
+  margin: 50px auto 50px;
+}
+select{
+  border: 1px solid #000080;
+  padding: 5px;
+}
+select:focus{
+  outline: none;
+}
+.page-btn{
+  margin: 0 auto 80;
+
+}
+.page-btn span{
+  display: inline-block;
+  border: 1px solid #000080;
+  margin-left: 10px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+}
+.page-btn span:hover{
+  background: #87CEEB;
+  color: #fff
+}
+/* ---------media query for menu -------- */
+
+.footer{
+  background: radial-gradient(#fff, #87CEEB);
+  font-size: 25px;
+  padding: 80px 0 40px:
+}
+/*-----------account-page  ---------*/
+.account-page{
+  padding: 50px 0;
+  background: radial-gradient(#fff, #87CEEB);
+}
+.form-container{
+  background: #fff;
+  width: 300px;
+  height: 400px;
+  position: relative;
+  text-align: center;
+  padding: 20px 0;
+  margin: auto;
+  box-shadow: 0 0 20px 0px rgba(0,0,0,0,1);
+  overflow: hidden;
+}
+.form-container span{
+  font-weight: bold;
+  padding: 0 10px;
+  color: #555;
+  cursor: pointer;
+  width: 100px;
+  display: inline-block;
+}
+.form-btn{
+  display: inline-block;
+}
+.form-container form{
+  max-width: 300px;
+  padding: 0 20px;
+  position: absolute;
+  top: 130px;
+  transition: transform 1s;
+}
+form input{
+  width: 100%;
+  height: 30px;
+  margin: 10px 0;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+}
+form .btn{
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  margin: 10px 0;
+}
+form .btn:focus{
+  outline: none;
+}
+#LoginForm{
+  left: -300px;
+}
+#RegForm{
+  left: 0;
+
+form a{
+  font-size: 12px;
+}
+#Indicator{
+  width: 100px;
+  border: none;
+  background: #87CEEB;
+  height: 3px;
+  margin-top: 8px;
+  transform: translateX(100px);
+  transition: transform 1s;
+}
+
+
+
+/* ---------media query for less than 600 screen size -------- */
+@media only screen and (max-width: 600px){
+  .row{
+    text-align: center;
+  }
+  .col-2, .col-3, .col-4{
+    flex-basis: 100%;
+  }
+  .cart-info p{
+    display: none;
+  }
+}
+/*-----------footer ---------*/
+.footer h3{
+  margin-bottom: 10px;
+}
+.footer-col-1, .footer-col-2{
+  min-width: 250px;
+  margin-bottom: 20px;
+}
+.footer-col-1{
+  flex-basis: 30%;
+}
+.footer-col-2{
+  flex-basis: 1;
+  text-align: center;
+}
+.footer-col-2 img{
+  width: 180px;
+  margin-bottom: 20px;
+  margin-top: 60px;
+  margin-right: 100px;
+}
+/* ---------single product details -------- */
+.single-product{
+   margin-top: 80px;
+}
+.single-product .col-2 img{
+   padding-left: 80px;
+   margin-top: -20px;
+   width: 150%;
+}
+.single-product .col-2{
+   padding: 20px;
+}
+.single-product h1{
+   margin-top: -40px;
+   font-size: 30px;
+   font-weight: bold;
+}
+.single-product h3{
+   margin:0;
+   font-size: 14px;
+   font-weight: bold;
+}
+.single-product h4{
+   margin-top: -20px;
+   font-size: 22px;
+   font-weight: bold;
+}
+
+.single-product select{
+  display: block;
+   padding: 5px;
+   margin-top: 20px;
+}
+.single-product input{
+   width: 50px;
+   height: 30px;
+   padding-left: 10px;
+   font-size: 18px;
+   margin-right: 10px;
+   border: 1px solid #000080;
+}
+input:focus{
+  outline: none;
+}
+
+/*-----------cart items details ---------*/
+.cart-page{
+  margin: 80px;
+}
+table{
+  width:100%;
+  border-collapse: collapse;
+}
+.cart-info{
+  display: flex;
+  flex-wrap: wrap;
+}
+th{
+  text-align: left;
+  padding: 5px;
+  color: #fff;
+  background: #87CEEB;
+  font-weight: normal;
+}
+td{
+  padding: 10px 5px;
+}
+td input{
+  width: 40px;
+  height: 30px;
+  padding: 5px;
+}
+td a{
+  margin-top: 40px;
+  color: #ff523b;
+  font-weight: 12px;
+}
+
+td img{
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+}
+.total-price{
+  display: flex;
+  justify-content: flex-end;
+}
+.total-price table{
+  border-top: 3px solid #87CEEB;
+  width: 100%;
+  max-width: 345px;
+}
+td:last-child{
+  text-align: right;
+}
+th:last-child{
+  text-align: right;
+}
