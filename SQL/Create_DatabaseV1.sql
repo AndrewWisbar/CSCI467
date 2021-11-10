@@ -16,6 +16,6 @@ CREATE TABLE OrderTotals(
     	OrderID	        INT			    	AUTO_INCREMENT UNIQUE NOT NULL,
     	TotalPrice      DECIMAL(8,2)			NOT NULL,
     	TotalWeight     DECIMAL(4,2)		    	NOT NULL,
-    	OrderQuantity 	INT		        	NOT NULL,
+    	Status          BOOLEAN                         NOT NULL DEFAULT 0
 	CONSTRAINT PRIMARY KEY(OrderID)
 );	
