@@ -8,7 +8,7 @@
 </head>
 <body>
     <form action="./clear_cart.php" method="post" id="clear_form"></form>
-    <form action="./order_processing.php" method='post' id="submit_form"></form>
+    <form action="./shipping_info.html" method='post' id="submit_form"></form>
     <div id="header">
         <img src="wrench.png" alt="" id='logo'>
         <a href="index.php" class="invis-link">
@@ -28,7 +28,7 @@
             session_start();
             include '../Backend/PHP/connect.php';
             $leg_conn = legacy_connect();
-            $total_price = 0;
+            $sub_price = 0;
             $total_weight = 0;
             if(count($_SESSION['shopping_cart']) > 0) {
                 print('<table class="cart_table">');
@@ -45,7 +45,7 @@
                     }
 
                     print('<tr><td><img src="' . $row['pictureURL'] . '" alt=""></td><td>' . $row['description'] . '</td><td>' . $row['price'] . '</td><td><input type="number" value="' . $entry . '" min=0 max=99 name="' . key($_SESSION['shopping_cart']) . '" id="' . key($_SESSION['shopping_cart']) . '"></td><td>' . $entry * $row['price'] . '</td></tr>');
-                    $total_price += $entry * $row['price'];
+                    $sub_price += $entry * $row['price'];
                     $total_weight += $entry * $row['weight'];
                     next($_SESSION['shopping_cart']);
                 }
@@ -56,10 +56,10 @@
             }
         ?>
     </form>
-    <h3>Sub Total: $<?php print($total_price); ?></h3>
-    <h3>Shipping Weight: <?php print($total_weight); ?></h3>
+    <h3>Sub Total: $<?php print($sub_price);?></h3>
+    <h3>Shipping Weight: <?php print($total_weight); $_SESSION['totalWeight'] = $total_weight;?></h3>
     <h3>Shipping Cost: $<?php print("0"); ?></h3>
-    <h3>Total Price: $<?php print($total_price); ?></h3>
+    <h3>Total Price: $<?php print($sub_price); $_SESSION['totalPrice'] = $sub_price; ?></h3>
     <button type="submit" class="add_btn" form='update_form'>Update Cart</button>
     <button type="submit" class="add_btn" form='clear_form'>Clear Cart</button>
     <button type="submit" class="add_btn" form='submit_form'>Submit Order</button>

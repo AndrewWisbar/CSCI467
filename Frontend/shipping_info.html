@@ -1,0 +1,46 @@
+
+<html>
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"></link>
+    <title>Auto Store</title>
+</head>
+<body>
+    <div id="header">
+        <img src="wrench.png" alt="" id='logo'>
+        <a href="index.php" class='invis-link'>
+            <h1 id="page-title">Auto Parts Store</h1>
+        </a>
+        <div id="search-div">
+            <form action="./search_results.php" method="post" id="search-form">
+                <input type="text" value="Search For Products" name="srch-field" id="srch-field">
+                <input type="submit" form="search-form">
+            </form>
+        </div>
+        <button type='submit' class='nav-btn' form='cart_form'>Cart</button>
+    </div>
+
+    <h2>Input Information</h2>
+    <form action="process_info.php" method="POST">
+        <label for="in_name">Name</label>
+        <input type="text" name="in_name" value="Full Name">
+        <br>
+        <label for="in_email">Email Address</label>
+        <input type="text" name="in_email" value="Email Address">
+        <br>
+        <label for="in_ccNum">Credit Card Number</label>
+        <input type="text" name="in_ccNum" value="Credit Card Number">
+        <br>
+        <label for="in_exp">Expiration Date </label>
+        <input type="text" name="in_exp" value="Credit Card Expiration">
+        <br>
+        <label for="in_addr">Shipping Address</label>
+        <input type="text" name="in_addr" value="Address">
+        <br>
+        <input type="submit"/>  
+    </form>
+</body>
+</html>
