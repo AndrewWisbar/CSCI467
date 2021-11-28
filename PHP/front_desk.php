@@ -38,7 +38,8 @@
 	//		(NOTE: CHANGE URL BELOW FOR DEMONSTRATION!!!!!!!!!!!!!!!!)
 	//		(NOTE: CHANGE URL BELOW FOR DEMONSTRATION!!!!!!!!!!!!!!!!)
 	//----------------------------------------------------------------------------------------------------------
-	echo '<form action="http://localhost/Project/front_desk.php" method="POST" id="form1"></form>';
+	echo '<form action="" method="POST" id="form1"></form>';
+	echo '<form action="./" method="POST" id="form2"></form>';
 	//----------------------------------------------------------------------------------------------------------
 	//RADIO BUTTONS
 	//----------------------------------------------------------------------------------------------------------
@@ -56,14 +57,27 @@
 	echo '<input type="text" name="input_data" id="part_data" form="form1">';
 	echo "\n\n";
 	//----------------------------------------------------------------------------------------------------------
+	//NUMBER BOX
+	//----------------------------------------------------------------------------------------------------------
+	echo "Enter quantity to add: \n";
+	echo '<input type="number" name="qty_data" id="qty_data" value="0" form="form1">';
+	echo "\n\n";
+	//----------------------------------------------------------------------------------------------------------
 	//SUBMIT BUTTON
 	//----------------------------------------------------------------------------------------------------------
 	echo '<input type="submit" name="input_submit" id="part_submit" value="Submit" form="form1">';
 	echo '<label for="part_submit"> (Update Quantity)</label>';
 	echo "\n\n";
 	//----------------------------------------------------------------------------------------------------------
+	//HOME BUTTON
+	//----------------------------------------------------------------------------------------------------------
+	echo '<input type="submit" name="Return" id="return" value="Home" form="form2">';
+	echo '<label for="part_submit"> (Return to Warehouse Homepage)</label>';
+	echo "\n\n";
+	//----------------------------------------------------------------------------------------------------------
 
 	//RETRIEVE INPUT DATA
+	$qty = $_POST['qty_data'];
 	$input_type = $_POST["input_type"];
 	$input_data = $_POST["input_data"];
 	$input_submit = $_POST["input_submit"];
@@ -91,7 +105,7 @@
 			//ONLY USE FIRST RESULT / ROW
 			$row = $result->fetch_assoc();
 			$part_ID = $row["number"]; //SAVE PART ID AND LOOK UP ID IN OTHER DATABASE + UPDATE QUANTITY
-			$query = "UPDATE inventorydatabase SET Quantity = Quantity + 1 WHERE ItemID = $part_ID";
+			$query = "UPDATE inventory SET Quantity = Quantity + $qty WHERE ItemID = $part_ID";
 			$result = $conn->query($query);
 			$rows_affected = mysqli_affected_rows($conn2);
 			if ($rows_affected > 0)

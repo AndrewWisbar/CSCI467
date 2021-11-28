@@ -43,4 +43,7 @@ else {
 ?>
 </table>
 </form>
+<form action="./" method="post">
+    <button type='submit'>Home</button>
+</form>
 </body>

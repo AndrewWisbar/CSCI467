@@ -7,11 +7,12 @@
 </head>
 <body>
 <h3>Warehouse Interface</h3>
+
+<form action="./view_unfulfilled.php" action="get" id='form1'></form>
+<form action="./front_desk.php" action="get" id='form2'></form>
 <div class='flex-container'>
-    <form action="./view_unfulfilled.php" action="get">
-        <button type="submit">Pack Orders</button>
-    </form>
-    <button>Other</button>
-    <button>Other</button>
+    <button type="submit" form='form1'>Pack Orders</button>
+    <button type="submit" form='form2'>Front Desk</button>
+    <button>Admin (Set S&H)</button>
 </div>
 </body>
