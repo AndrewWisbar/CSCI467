@@ -28,8 +28,12 @@
             session_start();
             include '../Backend/PHP/connect.php';
             $leg_conn = legacy_connect();
+            $conn = open_connection();
             $sub_price = 0;
             $total_weight = 0;
+            if(!isset($_SESSION['shopping_cart'])) {
+                $_SESSION['shopping_cart'] = array();
+            }
             if(count($_SESSION['shopping_cart']) > 0) {
                 print('<table class="cart_table">');
                 print('<tr><th>Image</th><th>Name</th><th>Price</th><th>Quantity</th><th>Total Price</th></tr>');
@@ -44,7 +48,16 @@
                         $row = $result->fetch_assoc();
                     }
 
-                    print('<tr><td><img src="' . $row['pictureURL'] . '" alt=""></td><td>' . $row['description'] . '</td><td>' . $row['price'] . '</td><td><input type="number" value="' . $entry . '" min=0 max=99 name="' . key($_SESSION['shopping_cart']) . '" id="' . key($_SESSION['shopping_cart']) . '"></td><td>' . $entry * $row['price'] . '</td></tr>');
+                    $query = "SELECT Quantity FROM inventory \nWHERE ItemID = " . key($_SESSION['shopping_cart']);
+    
+                    $res2 = $conn->query($query);
+    
+                    if($res2) {
+                        $row2 = $res2->fetch_assoc();
+                    }
+    
+
+                    print('<tr><td><img src="' . $row['pictureURL'] . '" alt=""></td><td>' . $row['description'] . '</td><td>' . $row['price'] . '</td><td><input type="number" value="' . $entry . '" min=1 max='.$row2['Quantity'].' name="' . key($_SESSION['shopping_cart']) . '" id="' . key($_SESSION['shopping_cart']) . '"></td><td>' . $entry * $row['price'] . '</td><td><button type="submit" name="remove" value="' . key($_SESSION['shopping_cart']) . '">Remove Item</button></td></tr>');
                     $sub_price += $entry * $row['price'];
                     $total_weight += $entry * $row['weight'];
                     next($_SESSION['shopping_cart']);

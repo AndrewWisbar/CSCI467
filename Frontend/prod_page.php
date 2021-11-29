@@ -36,12 +36,26 @@
                 if($result) {
                     $row = $result->fetch_assoc();
                 }
+
+                $conn = open_connection();
+
+                $query = "SELECT Quantity FROM inventory \nWHERE ItemID = " . $_GET['item'];
+
+                $res2 = $conn->query($query);
+
+                if($res2) {
+                    $row2 = $res2->fetch_assoc();
+                }
+
                 print('<img src="' . $row['pictureURL'] . '" alt="product picture" class="main-img">');
                 print('<div class="prod-info">');
                 print('<h2>' .$row['description']. '</h2>');
-                print('<p class="prod-price">$' . $row['price'] . '</p>');
                 print('<div class="flex-container">');
-                print('<input type="number" id="qty" name="qty" value="1" min="0" max="99">');
+                print('<p class="prod-price">$' . $row['price'] . '</p>');
+                print('<p class="prod-qty">Number Available: ' .$row2['Quantity']. '</p>');
+                print('</div>');
+                print('<div class="flex-container">');
+                print('<input type="number" id="qty" name="qty" value="1" min="1" max="' .$row2['Quantity']. '">');
                 print('<button type="submit" name="add_to_cart" value="' . $row['number'] . '" class="add-btn">Add to Cart</button>');
                 print('</div>');
             ?>

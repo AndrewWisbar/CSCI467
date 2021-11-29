@@ -28,7 +28,7 @@ if(session_id() != "") {
 $conn = open_connection();
 
 //Get all unfulfilled orders
-$query = "SELECT * FROM ordertotals \nWHERE Status = 0";
+$query = "SELECT * FROM orderdetails \nWHERE Status = 0";
 $result = $conn->query($query);
 
 //display orders in table

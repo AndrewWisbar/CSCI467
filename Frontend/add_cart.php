@@ -15,7 +15,6 @@
                 $_SESSION['shopping_cart'][$item_id] = $_POST['qty'];
             }
         }
-        
-        $_POST = array();
+
         header("Location: cart.php");
     ?>

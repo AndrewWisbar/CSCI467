@@ -42,6 +42,10 @@
     background-color: white;
     padding: 10px;
     width: 12em;
+    
+}
+
+.grid-item:hover {
     box-shadow: 5px 10px 10px 0px var(--shad);
 }
 
@@ -131,7 +135,17 @@
     height: 5em;
 }
 
+table {
+    border-collapse: unset;
+}
+
 td {
     justify-content: center;
     padding: 1em;
+}
+
+tr {
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
 }
