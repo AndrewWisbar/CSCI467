@@ -19,3 +19,10 @@ CREATE TABLE OrderTotals(
     	Status          INT(11)                         NOT NULL DEFAULT 0
 	CONSTRAINT PRIMARY KEY(OrderID)
 );	
+
+CREATE TABLE ShippingInfo(
+        BracketsNum	INT			    	UNIQUE NOT NULL,
+    	WeightLimit	DECIMAL(5,2)    		NOT NULL,
+    	Cost   	        DECIMAL(5,2)  			NOT NULL,
+    	CONSTRAINT PRIMARY KEY(BracketsNum)
+);	
