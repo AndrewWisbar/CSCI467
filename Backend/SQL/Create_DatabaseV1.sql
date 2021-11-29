@@ -21,7 +21,8 @@ CREATE TABLE OrderTotals(
 );	
 
 CREATE TABLE ShippingInfo(
-    	WeightLimit	DECIMAL(5,2)    NOT NULL,
-    	HigherCost   	DECIMAL(5,2)  	NOT NULL,
-    	LowerCost    	DECIMAL(5,2)  	NOT NULL,
+        BracketsNum	    INT			    UNIQUE NOT NULL,
+    	WeightLimit	    DECIMAL(5,2)    NOT NULL,
+    	Cost   	        DECIMAL(5,2)  	NOT NULL,
+    	CONSTRAINT PRIMARY KEY(BracketsNum)
 );	
