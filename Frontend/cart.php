@@ -27,46 +27,67 @@
     <h1>Your Cart:</h1>
     <form action="./update_cart.php" method='post' id="update_form">
         <?php
+            //Get session vars
             session_start();
+
+            //needed for db connections
             include '../Backend/PHP/connect.php';
-            $_SESSION['shipping'] = 0;
+            
+            //connect to both dbs
             $leg_conn = legacy_connect();
             $conn = open_connection();
+
+            //set counters to 0
             $sub_price = 0;
             $total_weight = 0;
+
+            //if we don't have a cart, make an empty one
+            //to avoid errors
             if(!isset($_SESSION['shopping_cart'])) {
                 $_SESSION['shopping_cart'] = array();
             }
+
+            //if the cart has an item in it
             if(count($_SESSION['shopping_cart']) > 0) {
                 print('<table class="cart_table">');
                 print('<tr><th>Image</th><th>Name</th><th>Price</th><th>Quantity</th><th>Total Price</th></tr>');
                 
+                //for each item in the cart
                 while($entry = current($_SESSION['shopping_cart'])) {
                 
+                    //get the part data from the legacy db
                     $query = "SELECT * FROM parts \nWHERE number = " . key($_SESSION['shopping_cart']) . "\nLIMIT 1";
-
                     $result = $leg_conn->query($query);
-
                     if($result) {
                         $row = $result->fetch_assoc();
                     }
 
+                    //get the number in our inventory from new db
                     $query = "SELECT Quantity FROM inventory \nWHERE ItemID = " . key($_SESSION['shopping_cart']);
-    
                     $res2 = $conn->query($query);
-    
                     if($res2) {
                         $row2 = $res2->fetch_assoc();
                     }
     
-
-                    print('<tr><td><img src="' . $row['pictureURL'] . '" alt=""></td><td>' . $row['description'] . '</td><td>' . $row['price'] . '</td><td><input type="number" value="' . $entry . '" min=1 max='.$row2['Quantity'].' name="' . key($_SESSION['shopping_cart']) . '" id="' . key($_SESSION['shopping_cart']) . '"></td><td>' . $entry * $row['price'] . '</td><td><button type="submit" name="remove" value="' . key($_SESSION['shopping_cart']) . '">Remove Item</button></td></tr>');
+                    //print the table row
+                    print('<tr><td><img src="' . $row['pictureURL'] . '" alt=""></td>
+                               <td>' . $row['description'] . '</td>
+                               <td>' . $row['price'] . '</td>
+                               <td><input type="number" value="' . $entry . '" min=1 max='.$row2['Quantity'].' name="' . key($_SESSION['shopping_cart']) . '" id="' . key($_SESSION['shopping_cart']) . '"></td>
+                               <td>' . $entry * $row['price'] . '</td>
+                               <td><button type="submit" name="remove" value="' . key($_SESSION['shopping_cart']) . '">Remove Item</button></td></tr>');
+                    
+                    //add up price and weight
                     $sub_price += $entry * $row['price'];
                     $total_weight += $entry * $row['weight'];
+
+                    //get the next item
                     next($_SESSION['shopping_cart']);
                 }
                 print('</table>');
 
+
+                //query for shipping rate
                 $query = "SELECT rate FROM shiprate
                           WHERE bound = (SELECT MAX(bound)
                                          FROM shiprate
@@ -74,9 +95,14 @@
                 $stmt = $conn->prepare($query);
                 $stmt->bind_param('i', $total_weight);
                 $stmt->execute();
+
+                //save our result in session
                 $result = $stmt->get_result();
                 $_SESSION['shipping'] = $result->fetch_row()[0];
 
+
+                //print the totals/buttons
+                //(This is awkward but we dont want them to display if there's no items in cart)
                 print('<h3>Sub Total: $' . $sub_price . '</h3>');
                 print('<h3>Shipping Weight:' . $total_weight . '</h3>');
                 $_SESSION['totalWeight'] = $total_weight;
@@ -93,11 +119,4 @@
             }
         ?>
     </form>
-    <!-- <h3>Sub Total: $<?php print($sub_price);?></h3>
-    <h3>Shipping Weight: <?php print($total_weight); $_SESSION['totalWeight'] = $total_weight;?></h3>
-    <h3>Shipping Cost: $<?php print($_SESSION['shipping']); ?></h3>
-    <h3>Total Price: $<?php print($sub_price + $_SESSION['shipping']); $_SESSION['totalPrice'] = $sub_price + $_SESSION['shipping']; ?></h3>
-    <button type="submit" class="add_btn" form='update_form'>Update Cart</button>
-    <button type="submit" class="add_btn" form='clear_form'>Clear Cart</button>
-    <button type="submit" class="add_btn" form='submit_form'>Submit Order</button> -->
 </body>
