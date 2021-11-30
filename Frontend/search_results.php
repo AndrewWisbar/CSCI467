@@ -7,6 +7,7 @@
     <title>Auto Store</title>
 </head>
 <body>
+    <form action="cart.php" method="post" id="cart_form"></form>
     <div id="header">
         <img src="wrench.png" alt="" id='logo'>
         <a href="index.php" class="invis-link">
@@ -15,10 +16,11 @@
         <div id="search-div">
             <form action="" method="post" id="search-form">
                 <input type="text" value="Search For Products" name="srch-field" id="srch-field">
-                <input type="submit" form="search-form">
+                <input type="submit" name="submit-srch" id="submit-srch" form="search-form">
+                <button type="submit" name="view-all" value=1 form="search-form">View All</button>
             </form>
         </div>
-        <button class='nav-btn'>Cart</button>
+        <button type='submit' class='nav-btn' form='cart_form'>Cart</button>
     </div>
     
         <?php
@@ -26,6 +28,10 @@
             include "funcs.php";
 
             $leg_conn = legacy_connect();
+
+            if(isset($_POST['view-all'])) {
+                $_POST['srch-field'] = "";
+            }
 
             $query = "SELECT * FROM parts \nWHERE description LIKE '%" . $_POST['srch-field'] . "%'";
 

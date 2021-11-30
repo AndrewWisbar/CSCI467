@@ -19,6 +19,7 @@
             <form action="./search_results.php" method="post" id="search-form">
                 <input type="text" value="Search For Products" name="srch-field" id="srch-field">
                 <input type="submit" form="search-form">
+                <button type="submit" name="view-all" value=1 form="search-form">View All</button>
             </form>
         </div>
         <button type='submit' class='nav-btn' form='home_form'>Home</button>
@@ -75,17 +76,28 @@
                 $stmt->execute();
                 $result = $stmt->get_result();
                 $_SESSION['shipping'] = $result->fetch_row()[0];
+
+                print('<h3>Sub Total: $' . $sub_price . '</h3>');
+                print('<h3>Shipping Weight:' . $total_weight . '</h3>');
+                $_SESSION['totalWeight'] = $total_weight;
+                print('<h3>Shipping Cost: ' . $_SESSION['shipping'] . '</h3>');
+                print('<h3>Total Price: ' . $sub_price + $_SESSION['shipping'] . '</h3>'); 
+                $_SESSION['totalPrice'] = $sub_price + $_SESSION['shipping'];
+                print('<button type="submit" class="add_btn" form="update_form">Update Cart</button>');
+                print('<button type="submit" class="add_btn" form="clear_form">Clear Cart</button>');
+                print('<button type="submit" class="add_btn" form="submit_form">Submit Order</button>');
+
             }
             else {
                 print("<h2>No Items in Cart</h2>");
             }
         ?>
     </form>
-    <h3>Sub Total: $<?php print($sub_price);?></h3>
+    <!-- <h3>Sub Total: $<?php print($sub_price);?></h3>
     <h3>Shipping Weight: <?php print($total_weight); $_SESSION['totalWeight'] = $total_weight;?></h3>
     <h3>Shipping Cost: $<?php print($_SESSION['shipping']); ?></h3>
     <h3>Total Price: $<?php print($sub_price + $_SESSION['shipping']); $_SESSION['totalPrice'] = $sub_price + $_SESSION['shipping']; ?></h3>
     <button type="submit" class="add_btn" form='update_form'>Update Cart</button>
     <button type="submit" class="add_btn" form='clear_form'>Clear Cart</button>
-    <button type="submit" class="add_btn" form='submit_form'>Submit Order</button>
+    <button type="submit" class="add_btn" form='submit_form'>Submit Order</button> -->
 </body>
