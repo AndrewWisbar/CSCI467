@@ -12,7 +12,7 @@
     <tr>
         <th>Order ID</th>
         <th>Total Weight</th>
-        <th>Select</th>
+        <th>Order Time</th>
     </tr>
 <?php
 
@@ -34,7 +34,7 @@ $result = $conn->query($query);
 //display orders in table
 if($result) {
     while($row = $result->fetch_assoc()) {
-        echo "<tr><td>" . $row["OrderID"] . "</td><td>" . $row["TotalWeight"] . '</td><td><button type="submit" name="submit" value="'. $row['OrderID'] .'">Pack Order</button></td></tr>';
+        echo "<tr><td>" . $row["OrderID"] . "</td><td>" . $row["TotalWeight"] . '</td><td>' . $row['time'] . '</td><td><button type="submit" name="submit" value="'. $row['OrderID'] .'">Pack Order</button></td></tr>';
     }
 }
 else {

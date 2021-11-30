@@ -29,9 +29,9 @@
             'content'=> json_encode($data)
         )
     );
-    $context  = stream_context_create($options);
-    $result = file_get_contents($url, false, $context);
-    $decoded = json_decode($result);
+    // $context  = stream_context_create($options);
+    // $result = file_get_contents($url, false, $context);
+    // $decoded = json_decode($result);
 
     if(isset($decoded->errors)) {
         print("<h3>Error: Transaction could not be completed</h3>");
@@ -42,10 +42,32 @@
     else {
         //Update the Orders Database
         $conn = open_connection();
-        $query = "INSERT INTO orderdetails (fname, lname, email, addr, TotalPrice, TotalWeight) VALUES ('". $_SESSION['fname'] . "', '" . $_SESSION['lname'] . "', '" . $_SESSION['email'] ."', '" . $_SESSION['address'] . "', " . $_SESSION['totalPrice'] . ", " . $_SESSION['totalWeight'] . ")";
-        
-        $result = $conn->query($query);
+
+
+        // add the order to the database
+        $query = 'INSERT INTO orderdetails (fname, lname, email, addr, TotalPrice, TotalWeight) VALUES (?, ?, ?, ?, ?, ?)';
+        $stmt = $conn->prepare($query);
+        //print_r($conn->error_list);
+        $stmt->bind_param("ssssii", $_SESSION['fname'], $_SESSION['lname'], $_SESSION['email'], $_SESSION['address'], $_SESSION['totalPrice'], $_SESSION['totalWeight']);
+        $stmt->execute();
+
+        $ord = $stmt->insert_id;
+
+        //for each item in the order, add it to orderquantity and update the inventory table
         while($entry = current($_SESSION['shopping_cart'])) {
+
+            //add to orderquantity
+            $query = 'INSERT INTO orderquantity VALUES (?, ?, ?)';
+            $item = key($_SESSION['shopping_cart']);
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("iii", $ord, $item, $entry);
+            $stmt->execute();
+
+            //update inventory
+            $query = 'UPDATE inventory SET Quantity = Quantity - ? WHERE ItemID = ?';
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param('ii', $entry, $item);
+            $stmt->execute();
             next($_SESSION['shopping_cart']);
         }
 

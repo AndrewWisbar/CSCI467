@@ -44,7 +44,7 @@ session_start();
 // Query to update inventory info
 
 // Query to change order status to complete
-$order_query = "UPDATE ordertotals \nSET Status=1 \nWHERE OrderID=" . $_SESSION['order'];
+$order_query = "UPDATE orderdetails \nSET Status=1 \nWHERE OrderID=" . $_SESSION['order'];
 
 $conn = open_connection();
 
