@@ -28,6 +28,7 @@
         <?php
             session_start();
             include '../Backend/PHP/connect.php';
+            $_SESSION['shipping'] = 0;
             $leg_conn = legacy_connect();
             $conn = open_connection();
             $sub_price = 0;
