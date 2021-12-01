@@ -50,7 +50,7 @@ $_SESSION['order'] = $_POST['submit'];
 ?>
 
 </table>
-<form action="./email_test.php" action="get">
+<form action="./email.php" action="get">
     <button type="submit">Contents Packed</button>
 </form>
 <form action="./view_unfulfilled.php" action="get">

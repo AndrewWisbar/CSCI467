@@ -29,14 +29,6 @@
 	echo "<font size=5>Input the data below to update the inventory quantity for delivered products</font>\n\n";
 	//----------------------------------------------------------------------------------------------------------
 	//SETUP FORM	
-	//		(NOTE: CHANGE URL BELOW FOR DEMONSTRATION!!!!!!!!!!!!!!!!)
-	//		(NOTE: CHANGE URL BELOW FOR DEMONSTRATION!!!!!!!!!!!!!!!!)
-	//		(NOTE: CHANGE URL BELOW FOR DEMONSTRATION!!!!!!!!!!!!!!!!)
-	//		(NOTE: CHANGE URL BELOW FOR DEMONSTRATION!!!!!!!!!!!!!!!!)
-	//		(NOTE: CHANGE URL BELOW FOR DEMONSTRATION!!!!!!!!!!!!!!!!)
-	//		(NOTE: CHANGE URL BELOW FOR DEMONSTRATION!!!!!!!!!!!!!!!!)
-	//		(NOTE: CHANGE URL BELOW FOR DEMONSTRATION!!!!!!!!!!!!!!!!)
-	//		(NOTE: CHANGE URL BELOW FOR DEMONSTRATION!!!!!!!!!!!!!!!!)
 	//----------------------------------------------------------------------------------------------------------
 	echo '<form action="" method="POST" id="form1"></form>';
 	echo '<form action="./" method="POST" id="form2"></form>';

@@ -58,7 +58,6 @@
         // add the order to the database
         $query = 'INSERT INTO orderdetails (fname, lname, email, addr, TotalPrice, TotalWeight) VALUES (?, ?, ?, ?, ?, ?)';
         $stmt = $conn->prepare($query);
-        //print_r($conn->error_list);
         $stmt->bind_param("ssssii", $_SESSION['fname'], $_SESSION['lname'], $_SESSION['email'], $_SESSION['address'], $_SESSION['totalPrice'], $_SESSION['totalWeight']);
         $stmt->execute();
 
