@@ -63,4 +63,12 @@ $_SESSION['order'] = $_POST['submit'];
         <button type="submit">Could Not Pack Order</button>
     </form>
 </div>
+<div class="btn-cont">
+    <form action="./print_shipping.php" action="get">
+        <button type="submit">Print Shipping Label</button>
+    </form>
+    <form action="./print_packing.php" action="get">
+        <button type="submit">Print Packing Info</button>
+    </form>
+</div>
 </body>
