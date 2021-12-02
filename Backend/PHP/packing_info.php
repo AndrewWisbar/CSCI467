@@ -3,14 +3,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"></link>
     <title>Auto Store - Order Fulfillment</title>
 </head>
 <body>
 <h3>Pack Orders</h3>
-<form action="./email_test.php" method="post">
 <table>
     <tr>
         <th>Item ID</th>
+        <th>Picture</th>
+        <th>Name/Description</th>
         <th>Quantity</th>
     </tr>
 <?php
@@ -24,7 +26,7 @@ if(!session_start()) {
 
 //connect to DB
 $conn = open_connection();
-
+$leg_conn = legacy_connect();
 //get the contents of the order 
 $query = "SELECT * FROM orderquantity \nWHERE OrderID = " . $_POST['submit'];
 $result = $conn->query($query);
@@ -34,10 +36,13 @@ $items = array();
 if($result) {
     while($row = $result->fetch_assoc()) {
 
+        $leg_query = "SELECT * FROM parts WHERE number = " . $row['ItemID'];
+        $leg_res = $leg_conn->query($leg_query);
+        $part = $leg_res->fetch_assoc();
         //store order contents
         $items[] = array("ID"=>$row['ItemID'], 
                         "qty"=>$row['OrderedQuantity']);
-        echo "<tr><td>". $row['ItemID'] ."</td><td>". $row['OrderedQuantity'] ."</td></tr>";
+        echo "<tr><td>". $row['ItemID'] ."</td><td><img src=\"" . $part['pictureURL'] . "\"</td><td>\"" . $part['description'] . "\"</td><td>". $row['OrderedQuantity'] ."</td></tr>";
     }
 }
 else {
@@ -50,10 +55,12 @@ $_SESSION['order'] = $_POST['submit'];
 ?>
 
 </table>
-<form action="./email.php" action="get">
-    <button type="submit">Contents Packed</button>
-</form>
-<form action="./view_unfulfilled.php" action="get">
-    <button type="submit">Could Not Pack Order</button>
-</form>
+<div class="btn-cont">
+    <form action="./email.php" action="get">
+        <button type="submit">Contents Packed</button>
+    </form>
+    <form action="./view_unfulfilled.php" action="get">
+        <button type="submit">Could Not Pack Order</button>
+    </form>
+</div>
 </body>
