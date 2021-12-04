@@ -14,7 +14,7 @@ using stdleft;
 using stdto_string;
 int main () 
 {
-    for(int i = 0; i  150; i++) {
+    for(int i = 1; i  150; i++) {
         cout  INSERT INTO InventoryDatabase (ItemID, Quantity) VALUES (  i  ,   stdrand() % 1000 + 1  );n;    
     }
     return 0;

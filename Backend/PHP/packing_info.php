@@ -16,7 +16,14 @@
         <th>Quantity</th>
     </tr>
 <?php
+/*
+packing_info.php
+This script shows a warehouse employees the contents of a selected order,
+and allows them to print a packing slip and a shipping label
 
+The script gets all the items from the order, and displays their info to
+the warehouse employee so they can pack the order for shipping
+*/
 include 'connect.php';
 
 //Start php session
@@ -24,7 +31,7 @@ if(!session_start()) {
     echo "Error: Unable to start php Session \nPlease Try Again";
 }
 
-//connect to DB
+//connect to DBs
 $conn = open_connection();
 $leg_conn = legacy_connect();
 //get the contents of the order 
@@ -36,16 +43,20 @@ $items = array();
 if($result) {
     while($row = $result->fetch_assoc()) {
 
+        //get the info for the part
         $leg_query = "SELECT * FROM parts WHERE number = " . $row['ItemID'];
         $leg_res = $leg_conn->query($leg_query);
         $part = $leg_res->fetch_assoc();
         //store order contents
         $items[] = array("ID"=>$row['ItemID'], 
                         "qty"=>$row['OrderedQuantity']);
+        
+        //show the item info to the employee
         echo "<tr><td>". $row['ItemID'] ."</td><td><img src=\"" . $part['pictureURL'] . "\"</td><td>\"" . $part['description'] . "\"</td><td>". $row['OrderedQuantity'] ."</td></tr>";
     }
 }
 else {
+    //if the info can't be retrieved, display that to the user
     Print("Failed To Retrieve Order Information");
 }
 

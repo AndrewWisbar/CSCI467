@@ -24,27 +24,40 @@
     </div>
     
         <?php
+        /*
+        search_results.php
+        
+        This page is displayed as the result of a user searching for parts,
+        or clicking the view all button
+        */
             include "../Backend/PHP/connect.php";
             include "funcs.php";
 
             $leg_conn = legacy_connect();
 
+            //if the view all was pressed, the search field should be empty
             if(isset($_POST['view-all'])) {
                 $_POST['srch-field'] = "";
             }
 
+
+            //get all parts matching the search field
             $query = "SELECT * FROM parts \nWHERE description LIKE '%" . $_POST['srch-field'] . "%'";
-
             $result = $leg_conn->query($query);
-
             if($result->num_rows) {
+
+                //if there are parts that match, generate a grid of results
                 print('<div class="grid-container">');
                 while($row = $result->fetch_assoc()) {
+
+                    // for each part, create a row
                     create_card($row);
                 }
                 print("</div>");
             }
             else {
+
+                // if no results could be found, tell the user
                 print('<h1>No Results for search term: "' . $_POST['srch-field'] . '"</h1>');
             }
         ?>

@@ -1,4 +1,9 @@
 <?php
+/*
+This file is included on most pages to allow for
+Database Connects to be made more easily
+*/
+
 function legacy_connect() {
     $servername = "blitz.cs.niu.edu";
     $username = "student";

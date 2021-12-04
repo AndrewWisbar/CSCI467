@@ -27,6 +27,12 @@
     <h1>Your Cart:</h1>
     <form action="./update_cart.php" method='post' id="update_form">
         <?php
+        /*
+        cart.php
+
+        This script displays the items stored in a customers cart,
+        as well as the sub total price, shipping price, total price and weight of the order
+        */
             //Get session vars
             session_start();
 
@@ -115,6 +121,8 @@
 
             }
             else {
+
+                //if the cart is empty, say so
                 print("<h2>No Items in Cart</h2>");
             }
         ?>

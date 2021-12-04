@@ -16,7 +16,11 @@
         <th>Order Time</th>
     </tr>
 <?php
-
+/*
+view_unfulfilled.php
+This script displays the unfulfilled orders in the database 
+to a warehouse employee, so they can pack the orders and prep them for shipping
+*/
 include 'connect.php';
 
 //if there is an active session end it.

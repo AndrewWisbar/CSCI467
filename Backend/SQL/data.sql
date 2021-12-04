@@ -1,4 +1,3 @@
-INSERT INTO inventory (ItemID, Quantity) VALUES (0, 384);
 INSERT INTO inventory (ItemID, Quantity) VALUES (1, 887);
 INSERT INTO inventory (ItemID, Quantity) VALUES (2, 778);
 INSERT INTO inventory (ItemID, Quantity) VALUES (3, 916);

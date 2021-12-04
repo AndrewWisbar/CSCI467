@@ -31,6 +31,15 @@
     <h3>Suggested Products</h3>
     <div class="grid-container">
         <?php
+        /*
+        index.php
+
+        this is the landing page for users as they enter the site,
+        it displays a short description of the services and displays some recommended products.
+
+        This page also allows the user to view the parts catalog, 
+        or their own cart, as well as execute a search for specific parts
+        */
 
             //start a session and create a shopping cart
             if(!isset($_SESSION['shopping_cart'])) {

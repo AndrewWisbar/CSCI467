@@ -1,5 +1,12 @@
 <?php
+    /*
+    process_info.php
 
+    This is perhaps the most important script of the webpage,
+    It recieves all the details from an order that the customer is trying to place,
+    verifies the info and places is in the appropriate databases.
+    This script also verifies the credit card information supplied by a customer.
+    */
     include '../Backend/PHP/connect.php';
     session_start();
 
@@ -42,7 +49,7 @@
     $result = file_get_contents($url, false, $context);
     $decoded = json_decode($result);
 
-    //if we got any errors in the transaction, display
+    //if we got any errors in the transaction, display them
     if(isset($decoded->errors)) {
         print("<h3>Error: Transaction could not be completed</h3>");
         foreach($decoded->errors as $err) {

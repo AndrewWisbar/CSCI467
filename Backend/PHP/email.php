@@ -8,7 +8,14 @@
 <body>
 <h3>Unfulfilled Orders</h3>
 <?php
+/*
+email.php
+This script sends the confirmation email to the user 
+when an order has been packed and is ready to be sent out
 
+This script recieves the order number from the previous page, packing_info.php,
+And retrieves the remaining info needed to send the email from the database. 
+*/
 include 'connect.php';
 //Given an email and an order ID, send a confirmation email
 function send_email($ordernum, $items, $to_email) {
